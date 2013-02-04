@@ -1,0 +1,20 @@
+////////////////////
+/// C++ Object-oriented Programming
+/// Adventure Game 6
+/// Reference answer 
+/// anssi.grohn@pkamk.fi
+////////////////////
+#ifndef __IRenderer_h__
+#define __IRenderer_h__
+
+#include <string>
+using namespace std;
+
+////////////////////////////////////////////////////////////////////////////////
+class IRenderer 
+{
+public:
+  virtual void Render( const std::string & str ) = 0;
+};
+////////////////////////////////////////////////////////////////////////////////
+#endif
