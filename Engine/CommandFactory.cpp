@@ -10,6 +10,9 @@
 #include "AttackCommand.h"
 #include "UnknownCommand.h"
 #include "MoveCommand.h"
+#include "LoadCommand.h"
+#include "SaveCommand.h"
+#include "PrintPlayerSheetCommand.h"
 #include "Game.h"
 #include <sstream>
 #include <string>
@@ -37,6 +40,21 @@ CommandFactory::Create( const std::string & str )
   if ( word == "attack" )
   {
     return new AttackCommand(m_pGame);
+  }
+  
+  if (word == "load")
+  {
+	return new LoadCommand(m_pGame);
+  }
+  
+  if (word == "save")
+  {
+	return new SaveCommand(m_pGame);
+  }
+  
+  if (word == "print")
+  {
+	return new PrintPlayerSheetCommand(m_pGame);
   }
 
   if ( word == "move" )
@@ -69,9 +87,8 @@ CommandFactory::Create( const std::string & str )
       command->SetDirection(West);
       return command;
     }
-
   }
-
+ 
   return new UnknownCommand(m_pGame);  
 }
 ////////////////////////////////////////////////////////////////////////////////

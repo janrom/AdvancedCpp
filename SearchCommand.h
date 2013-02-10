@@ -22,11 +22,18 @@ public:
     if ( rand()%1000 < 436 )
     {
       GoldFactory f;
-      Gold *g = f.Create( 1+rand()%100 );
-      std::ostringstream s;
-      s << "You found " << g->GetAmount() << " gold!\n";
-      GetGame()->GetRenderer()->Render(s.str());
-      delete g;
+	  try
+	  {
+		Gold *g = f.Create( 1+rand()%100 );
+	  	std::ostringstream s;
+		s << "You found " << g->GetAmount() << " gold!\n";
+		GetGame()->GetRenderer()->Render(s.str());
+		delete g;
+	  }
+	  catch(exception e)
+	  {
+		cout << "Memory allocation error with error message: " << e.what() << endl;
+	  }
     }
     else {
       GetGame()->GetRenderer()->Render( "You found nothing.\n");

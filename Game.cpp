@@ -73,10 +73,10 @@ void Game::Play()
   ostringstream s;
   s << "by " << DEV_NAME << "(c) " << YEAR << ". Licensed under GPLv3.\n";
   renderer->Render(s.str());
-  Player::AskInfo(player);
-  renderer->Render("\nPlayer statistics:\n\n");
-  player.PrintSummary();
-  renderer->Render("\nAnd behold, the adventure begins!\n");
+  //Player::LoadGame(player);
+  renderer->Render("\nType \"load\" to continue saved game :\n\n");
+  //player.PrintSummary();
+  //renderer->Render("\nAnd behold, the adventure begins!\n\n");
   
   player.SetGame(this);
   
@@ -89,10 +89,17 @@ void Game::Play()
     getline(cin,cmd);
 
     CommandFactory comm(this);
-    ICommand *pCommand = comm.Create( cmd ); 
-    if ( pCommand ) pCommand->Execute();
-    delete pCommand;
-
+	try
+	{
+		ICommand *pCommand = comm.Create( cmd ); 
+		if ( pCommand ) pCommand->Execute();
+		delete pCommand;
+	}
+	catch(exception e)
+	{
+		cout << "Memory allocation error with error message" << e.what() << endl;
+	}
+	
     GetCurrentRoom()->Update();
       
     if ( player.GetHitpoints() <= 0 ) {

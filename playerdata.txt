@@ -1,7 +1,12 @@
-#player
-Anssi
-1
+
+Janne
+
+Troll
+
 0
-32
-m
+
+33
+
+0
+
 0

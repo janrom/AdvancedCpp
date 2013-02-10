@@ -20,10 +20,7 @@ public:
   virtual ~Player();
   void SetGame( Game * game );
   void Attack( GameObject *pObject);
-
   void PrintSummary();
-  static void AskInfo( Player & p );
-
 };
 ////////////////////////////////////////////////////////////////////////////////
 #endif
