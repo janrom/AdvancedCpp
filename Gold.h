@@ -11,14 +11,22 @@ class GoldFactory;
 ////////////////////////////////////////////////////////////////////////////////
 class Gold 
 {
-  friend class GoldFactory;
+ 
 private:
   unsigned int m_nAmount;
-  Gold(unsigned int value);
+  
 public:
+	Gold(unsigned int value);
   virtual ~Gold();
   unsigned int GetAmount() const;
   void SetAmount( unsigned int value );
+	Gold &operator+=(Gold *p_gold)
+	{
+		Gold *gold = new Gold(0);
+		gold->m_nAmount = p_gold->GetAmount();
+		
+		return *gold;
+	}
 };
 ////////////////////////////////////////////////////////////////////////////////
 #endif

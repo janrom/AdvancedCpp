@@ -11,6 +11,7 @@
 class Game;
 class Command : public ICommand
 {
+friend class GoldFactory;
 private:
   // Pointer to game
   Game *m_pGame;

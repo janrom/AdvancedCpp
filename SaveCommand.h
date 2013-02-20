@@ -54,6 +54,12 @@ public:
 			os.clear();
 			os.str( string() );
 			
+			iTmp = GetGame()->GetPlayer().gold;
+			os << iTmp;
+			ofs << os.str() + "\n";
+			os.clear();
+			os.str( string() );
+			
 			ofs.close();
 		}
 		catch(exception & e)

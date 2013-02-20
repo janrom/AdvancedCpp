@@ -71,6 +71,13 @@ public:
 		os.clear();
 		os.str( string() );
 		os << iTmp;
-		tr.Render( "Experience: " + os.str() + "\n\n" );		
+		tr.Render( "Experience: " + os.str() + "\n" );	
+
+		iTmp = 0;
+		iTmp = GetGame()->GetPlayer().gold;
+		os.clear();
+		os.str( string() );
+		os << iTmp;
+		tr.Render( "Gold: " + os.str() + "\n\n" );			
 	}
 };

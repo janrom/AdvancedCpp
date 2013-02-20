@@ -12,33 +12,36 @@
 #include "Game.h"
 #include <sstream>
 #include "IRenderer.h"
+#include "Command.h"
 ////////////////////////////////////////////////////////////////////////////////
 class SearchCommand : public Command
 {
 public:
-  SearchCommand( Game *pGame ) : Command(pGame) {}
-  void Execute()
-  {
-    if ( rand()%1000 < 436 )
-    {
-      GoldFactory f;
-	  try
-	  {
-		Gold *g = f.Create( 1+rand()%100 );
-	  	std::ostringstream s;
-		s << "You found " << g->GetAmount() << " gold!\n";
-		GetGame()->GetRenderer()->Render(s.str());
-		delete g;
-	  }
-	  catch(exception e)
-	  {
-		cout << "Memory allocation error with error message: " << e.what() << endl;
-	  }
-    }
-    else {
-      GetGame()->GetRenderer()->Render( "You found nothing.\n");
-    }
-  }
+	SearchCommand( Game *pGame ) : Command(pGame) {}
+	void Execute()
+	{
+		if ( rand() % 1000 < 436 )
+		{
+			GoldFactory f;
+			try
+			{
+				Gold *g = f.Create( rand() % 100 );
+				std::ostringstream s;
+				s << "You found " << g->GetAmount() << " gold!\n";
+				GetGame()->GetRenderer()->Render(s.str());
+				GetGame()->GetPlayer().gold += g->GetAmount();
+				delete g;
+			}
+			catch(exception e)
+			{
+			cout << "Memory allocation error with error message: " << e.what() << endl;
+			}
+		}
+		else 
+		{
+			GetGame()->GetRenderer()->Render( "You found nothing.\n");
+		}
+	}
 };
 ////////////////////////////////////////////////////////////////////////////////
 #endif

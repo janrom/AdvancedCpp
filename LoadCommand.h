@@ -27,15 +27,20 @@ public:
 			string strTmp;
 			int iTmp = 0;
 			int i = 0;
-			string sArray[5];
+			string sArray[7];
 			
-			// if getline don't get any values anymore it return false and loop stops
-			while( getline(ifs, strTmp) )
+			// while stream have stuff in it
+			while( !ifs.eof() )
 			{
-				// get every line from a file and place it to string array
-				getline(ifs, strTmp); 
+				getline(ifs, strTmp);
+				// starting mark for player statics
+				if(strTmp == "#player")
+					continue;
+				// ending mark
+				if(strTmp == "#")
+					break;
 				sArray[i] = strTmp;
-				i++;
+				i++;				
 			}
 						
 			GetGame()->GetPlayer().SetName(sArray[0]);
@@ -56,6 +61,10 @@ public:
 			iTmp = 0;
 			iTmp = atoi( sArray[5].c_str() ); 
 			GetGame()->GetPlayer().SetExperience(iTmp);	
+			
+			iTmp = 0;
+			iTmp = atoi( sArray[6].c_str() ); 
+			GetGame()->GetPlayer().gold = iTmp;	
 			
 			ifs.close();
 		}
